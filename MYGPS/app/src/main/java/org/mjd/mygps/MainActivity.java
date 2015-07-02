@@ -17,7 +17,11 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
 /**
@@ -42,8 +46,11 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
 
                 // 위치 정보 확인을 위해 정의한 메소드 호출
-                startLocationService();
-
+                //startLocationService();
+                //위 경도
+                Double latitude = 37.6104154;
+                Double longitude =126.9943125;
+                showLocation(latitude,longitude); //여기서부터 식당정보가 넘어가야함.
             }
         });
     }
@@ -81,13 +88,13 @@ public class MainActivity extends ActionBarActivity {
                 Double latitude = lastLocation.getLatitude();
                 Double longitude = lastLocation.getLongitude();
 
-                Toast.makeText(getApplicationContext(), "Last Known Location : " + "Latitude : " + latitude + "\nLongitude:" + longitude, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Last Known Location : " + "Latitude : " + latitude + "\nLongitude:" + longitude, Toast.LENGTH_LONG).show();
             }
         } catch(Exception ex) {
             ex.printStackTrace();
         }
 
-        Toast.makeText(getApplicationContext(), "위치 확인이 시작되었습니다. 로그를 확인하세요.", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "위치 확인이 시작되었습니다. 로그를 확인하세요.", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -110,8 +117,8 @@ public class MainActivity extends ActionBarActivity {
         }
 
         private void showCurrentLocation(Double latitude, Double longitude){
-            LatLng curPoint = new LatLng(latitude, longitude);
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 15));
+            LatLng curPoint = new LatLng(latitude, longitude); // 기준위치정보
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 19));
             map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         }
 
@@ -125,6 +132,25 @@ public class MainActivity extends ActionBarActivity {
         }
 
     }
+    private void showLocation(Double latitude, Double longitude){
+        showMark(latitude,longitude,"송백식당","서울시 성북구 지하세계"); //여기서 하이퍼링크 또는 상세정보 액티비티로 연결하는 방법 찾아야함.
+        LatLng curPoint = new LatLng(latitude, longitude); // 기준위치정보
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 19));
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+    }
+
+    private void showMark(Double latitude, Double longitude,String title,String address){
+        MarkerOptions marker = new MarkerOptions();
+        marker.position(new LatLng(latitude+0.000001,longitude+0.000001));
+        marker.title(title);
+        marker.snippet(address);
+        marker.draggable(true);
+        marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.rc));
+
+        map.addMarker(marker);
+
+    }
+
     @Override
     public void onResume() {
         super.onResume();
