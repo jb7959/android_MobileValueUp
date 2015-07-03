@@ -19,20 +19,20 @@ public class RestourantActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restourant);
         LinearLayout resLayout =  (LinearLayout) findViewById(R.id.resLayout);
-        String title = getIntent().getExtras().getString("title"); // ÀÎÅÙÆ®·Î ³Ñ¾î¿Â Å¸ÀÌÆ² ¹Ş±â. ÃßÈÄ µğºñ key·Î È°¿ëÇÏ¸é µÉµí. ¾×Æ¼ºñÆ¼°£ ÂüÁ¶ È°¿ë
-        //ÅØ½ºÆ®Ã¢
+        String title = getIntent().getExtras().getString("title"); // ì¸í…íŠ¸ë¡œ ë„˜ì–´ì˜¨ íƒ€ì´í‹€ ë°›ê¸°. ì¶”í›„ ë””ë¹„ keyë¡œ í™œìš©í•˜ë©´ ë ë“¯. ì•¡í‹°ë¹„í‹°ê°„ ì°¸ì¡° í™œìš©
+        //í…ìŠ¤íŠ¸ì°½
         TextView text1 = new TextView(this);
         text1.setText(title);
         resLayout.addView(text1);
 
-        //¸Ş´º±×¸²
-        //±×¸²ÂüÁ¶´Â http://blog.naver.com/yikj1004/134314705
+        //ë©”ë‰´ê·¸ë¦¼
+        //ê·¸ë¦¼ì°¸ì¡°ëŠ” http://blog.naver.com/yikj1004/134314705
         ImageView resImage = (ImageView) findViewById(R.id.resImage);
-        resImage.setImageResource(R.drawable.arrow);
+        resImage.setImageResource(R.drawable.songbaek);
 
-        //¼³¸í
+        //ì„¤ëª…
         String temp = getIntent().getExtras().getString("key");
-        String explain = "no value"; //ÇÑ±Û·Î ¾È³ª¿À´Â ¹®Á¦ Ã³¸®ÇÒ°Í.
+        String explain = "no value"; //í•œê¸€ë¡œ ì•ˆë‚˜ì˜¤ëŠ” ë¬¸ì œ ì²˜ë¦¬í• ê²ƒ.
         if(temp.equals("1")) {
          explain = "goooooodd";
         }
