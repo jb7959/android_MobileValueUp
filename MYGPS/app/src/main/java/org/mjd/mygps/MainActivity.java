@@ -1,6 +1,7 @@
 package org.mjd.mygps;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -23,6 +24,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Queue;
+
 
 /**
  * 위치 관리자를 이용해 내 위치를 확인하는 방법에 대해 알 수 있습니다.
@@ -32,6 +35,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
  */
 public class MainActivity extends ActionBarActivity {
     GoogleMap map;
+
+        Double [] latitude  = new Double[5];
+        Double [] longitude = new Double[5];
+        String [] title = new String[5];
+        String [] address = new String[5];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +60,18 @@ public class MainActivity extends ActionBarActivity {
                 Double latitude = 37.6104154;
                 Double longitude =126.9943125;
                 showLocation(latitude,longitude); //여기서부터 식당정보가 넘어가야함.
+
+                //마커클릭시이벤트
+                map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                    @Override
+                    public void onInfoWindowClick(Marker marker) {
+                       // Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), RestourantActivity.class);
+                        intent.putExtra("title","송백식당"); // 인텐트에 데이터 추가.
+                        intent.putExtra("key","1");
+                        startActivity(intent);
+                    }
+                });
             }
         });
     }
@@ -139,13 +160,16 @@ public class MainActivity extends ActionBarActivity {
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
     }
 
+
+
     private void showMark(Double latitude, Double longitude,String title,String address){
         MarkerOptions marker = new MarkerOptions();
-        marker.position(new LatLng(latitude+0.000001,longitude+0.000001));
+        marker.position(new LatLng(latitude + 0.000001, longitude + 0.000001));
         marker.title(title);
         marker.snippet(address);
         marker.draggable(true);
         marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.rc));
+
 
         map.addMarker(marker);
 
