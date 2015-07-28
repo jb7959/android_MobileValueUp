@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -24,7 +25,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
+import java.util.Iterator;
+import java.util.List;
 
 
 /**
@@ -34,47 +36,158 @@ import com.google.android.gms.maps.model.MarkerOptions;
  *
  */
 public class MainActivity extends ActionBarActivity {
-    GoogleMap map;
 
-        Double [] latitude  = new Double[5];
-        Double [] longitude = new Double[5];
-        String [] title = new String[5];
-        String [] address = new String[5];
+    public static final int REQUEST_CODE_ANOTHER = 1001;
+    GoogleMap map;
+    RestaurantModel ResModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //Map 초기화
         map = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
+        //레스토랑 모델 할당
+        ResModel = new RestaurantModel();
+        //버튼배열 5개 선언 및 할당
+        Button [] buttons = new Button[]{
+                (Button) findViewById(R.id.button01)
+                ,(Button) findViewById(R.id.button02)
+                ,(Button) findViewById(R.id.button03)
+                ,(Button) findViewById(R.id.button04)
+                ,(Button) findViewById(R.id.button05)
+        };
 
-
-        // 버튼 이벤트 처리
-        Button button01 = (Button) findViewById(R.id.button01);
-        button01.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                // 위치 정보 확인을 위해 정의한 메소드 호출
-                //startLocationService();
-                //위 경도
-                Double latitude = 37.6104154;
-                Double longitude =126.9943125;
-                showLocation(latitude,longitude); //여기서부터 식당정보가 넘어가야함.
-
-                //마커클릭시이벤트
-                map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                    @Override
-                    public void onInfoWindowClick(Marker marker) {
-                       // Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), RestourantActivity.class);
-                        intent.putExtra("title","송백식당"); // 인텐트에 데이터 추가.
-                        intent.putExtra("key","1");
-                        startActivity(intent);
-                    }
-                });
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                // Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), RestourantActivity.class);
+                intent.putExtra("title", "송백식당"); // 인텐트에 데이터 추가.
+                intent.putExtra("key", "1");
+                startActivity(intent);
             }
         });
-    }
+
+        // 버튼 이벤트 처리
+            buttons[1].setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    // 위치 정보 확인을 위해 정의한 메소드 호출
+                    //startLocationService();
+                    List ResList;
+                    Iterator iterator;
+                    map.clear();
+                        ResList = ResModel.getNW();
+                        iterator = ResList.iterator();
+                        while(iterator.hasNext()){
+                            Restaurant res = (Restaurant)iterator.next();
+                            Double latitude = res.getLatitude();
+                            Double longitude = res.getLongitude();
+                            String title = res.gettitle();
+                            String phoneNumber = res.getPhoneNumber();
+                            showMark(latitude, longitude, title, phoneNumber); //여기서부터 식당정보가 넘어가야함. 위치 포인트 찍기.
+                            //마커클릭시이벤트
+                        };
+                        showLocation(37.5130529,126.9380114);
+
+                }
+            });
+
+        buttons[2].setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // 위치 정보 확인을 위해 정의한 메소드 호출
+                //startLocationService();
+                List ResList;
+                Iterator iterator;
+                map.clear();
+                ResList = ResModel.getNE();
+                iterator = ResList.iterator();
+                while (iterator.hasNext()) {
+                    Restaurant res = (Restaurant) iterator.next();
+                    Double latitude = res.getLatitude();
+                    Double longitude = res.getLongitude();
+                    String title = res.gettitle();
+                    String phoneNumber = res.getPhoneNumber();
+                    showMark(latitude, longitude, title, phoneNumber); //여기서부터 식당정보가 넘어가야함. 위치 포인트 찍기.
+                    //마커클릭시이벤트
+                };
+                showLocation(37.5119953, 126.9440458);
+
+            }
+        });
+
+        buttons[3].setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // 위치 정보 확인을 위해 정의한 메소드 호출
+                //startLocationService();
+                List ResList;
+                Iterator iterator;
+                map.clear();
+                ResList = ResModel.getSW();
+                iterator = ResList.iterator();
+                while (iterator.hasNext()) {
+                    Restaurant res = (Restaurant) iterator.next();
+                    Double latitude = res.getLatitude();
+                    Double longitude = res.getLongitude();
+                    String title = res.gettitle();
+                    String phoneNumber = res.getPhoneNumber();
+                    showMark(latitude, longitude, title, phoneNumber); //여기서부터 식당정보가 넘어가야함. 위치 포인트 찍기.
+                    //마커클릭시이벤트
+                };
+                showLocation(37.5069320,126.9396987);
+            }
+        });
+
+        buttons[4].setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // 위치 정보 확인을 위해 정의한 메소드 호출
+                //startLocationService();
+                List ResList;
+                Iterator iterator;
+                map.clear();
+                ResList = ResModel.getSE();
+                iterator = ResList.iterator();
+                while (iterator.hasNext()) {
+                    Restaurant res = (Restaurant) iterator.next();
+                    Double latitude = res.getLatitude();
+                    Double longitude = res.getLongitude();
+                    String title = res.gettitle();
+                    String phoneNumber = res.getPhoneNumber();
+                    showMark(latitude, longitude, title, phoneNumber); //여기서부터 식당정보가 넘어가야함. 위치 포인트 찍기.
+                    //마커클릭시이벤트
+                };
+                showLocation(37.5079397,126.9477678);
+
+            }
+        });
+
+        buttons[0].setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // 위치 정보 확인을 위해 정의한 메소드 호출
+                //startLocationService();
+                List ResList;
+                Iterator iterator;
+                List [] resListArray = new List[]{ResModel.getNE(),ResModel.getNW(),ResModel.getSE(),ResModel.getSW()};
+                for (int i = 0;i<resListArray.length;i++){
+                    ResList = resListArray[i];
+                    iterator = ResList.iterator();
+                   while (iterator.hasNext()) {
+                        Restaurant res = (Restaurant) iterator.next();
+                        Double latitude = res.getLatitude();
+                        Double longitude = res.getLongitude();
+                        String title = res.gettitle();
+                        String phoneNumber = res.getPhoneNumber();
+                        showMark(latitude, longitude, title, phoneNumber); //여기서부터 식당정보가 넘어가야함. 위치 포인트 찍기.
+                        //마커클릭시이벤트
+                    };
+                    showLocation(37.5088411, 126.940468);
+                }
+            }
+
+        });
+        }
+
 
     /**
      * 위치 정보 확인을 위해 정의한 메소드
@@ -114,10 +227,10 @@ public class MainActivity extends ActionBarActivity {
         } catch(Exception ex) {
             ex.printStackTrace();
         }
-
         //Toast.makeText(getApplicationContext(), "위치 확인이 시작되었습니다. 로그를 확인하세요.", Toast.LENGTH_SHORT).show();
 
     }
+
 
     /**
      * 리스너 클래스 정의
@@ -153,20 +266,21 @@ public class MainActivity extends ActionBarActivity {
         }
 
     }
+    //맵에 초점 이동
     private void showLocation(Double latitude, Double longitude){
-        showMark(latitude,longitude,"송백식당","서울시 성북구 지하세계"); //여기서 하이퍼링크 또는 상세정보 액티비티로 연결하는 방법 찾아야함.
+        //showMark(latitude,longitude,title,phoneNumber); //여기서 하이퍼링크 또는 상세정보 액티비티로 연결하는 방법 찾음 ; map.setOnInfoWindowClickListener
         LatLng curPoint = new LatLng(latitude, longitude); // 기준위치정보
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 19));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 15));
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
     }
 
 
-
-    private void showMark(Double latitude, Double longitude,String title,String address){
+    //맵에 표시
+    private void showMark(Double latitude, Double longitude,String title,String phoneNumber){
         MarkerOptions marker = new MarkerOptions();
         marker.position(new LatLng(latitude + 0.000001, longitude + 0.000001));
         marker.title(title);
-        marker.snippet(address);
+        marker.snippet(phoneNumber);
         marker.draggable(true);
         marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.rc));
 
@@ -213,5 +327,11 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Toast.makeText(this,"onStop fisrst main",Toast.LENGTH_LONG).show();
     }
 }

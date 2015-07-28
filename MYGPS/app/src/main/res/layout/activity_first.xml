@@ -16,4 +16,14 @@
         android:onClick="startBtn"
         />
 
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="돌아가기"
+        android:textSize="22dp"
+        />
+
 </LinearLayout>

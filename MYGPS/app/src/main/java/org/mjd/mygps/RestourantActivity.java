@@ -10,9 +10,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.content.Intent;
+
+
 
 
 public class RestourantActivity extends ActionBarActivity {
+    Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +33,9 @@ public class RestourantActivity extends ActionBarActivity {
         resLayout.addView(text1);
 
         //메뉴그림
-        //그림참조는 http://blog.naver.com/yikj1004/134314705
-        ImageView resImage = (ImageView) findViewById(R.id.resImage);
-        resImage.setImageResource(R.drawable.songbaek);
+        //그림참조는 http://blog.naver.com/yikj1004/134314705F
+       ImageView resImage = (ImageView) findViewById(R.id.resImage);
+       resImage.setImageResource(R.drawable.songbaek2);
 
         //설명
         String temp = getIntent().getExtras().getString("key");
@@ -40,8 +47,15 @@ public class RestourantActivity extends ActionBarActivity {
         text2.setText(explain);
         resLayout.addView(text2);
 
-    }
 
+
+
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Toast.makeText(this, "onStop fisrst Rest", Toast.LENGTH_LONG).show();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
