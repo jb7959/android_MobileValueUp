@@ -63,8 +63,8 @@
         <activity
             android:name=".RestourantActivity"
             android:label="@string/title_activity_restourant"
-            android:theme="@style/Theme.AppCompat.Dialog"
-            >
+            android:theme="@style/Theme.AppCompat.Dialog">
+
         </activity>
     </application>
 

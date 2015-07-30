@@ -9,25 +9,25 @@ import java.util.Queue;
  */
 public class RestaurantModel {
 
-    private ArrayList<Restaurant> NE = new ArrayList<>();  //ºÏµ¿
-    private ArrayList<Restaurant> NW = new ArrayList<>();  //ºÏ¼­
-    private ArrayList<Restaurant> SE = new ArrayList<>();  //³²µ¿
-    private ArrayList<Restaurant> SW = new ArrayList<>();  //³²¼­
+    private ArrayList<Restaurant> NE = new ArrayList<>();  //ë¶ë™
+    private ArrayList<Restaurant> NW = new ArrayList<>();  //ë¶ì„œ
+    private ArrayList<Restaurant> SE = new ArrayList<>();  //ë‚¨ë™
+    private ArrayList<Restaurant> SW = new ArrayList<>();  //ë‚¨ì„œ
 
     public RestaurantModel(){
-        NE.add(new Restaurant(126.9421816,37.5138589,"È¨½ºÅ×µå","02-825-3359"));
-        NE.add(new Restaurant(126.9440458,37.5119953,"¿ªÀü¿ìµ¿0410","02-825-0410"));
-        NE.add(new Restaurant(126.9454925,37.5132417,"Å¸ÀÌÆÌ","02-824-2181"));
+        NE.add(new Restaurant(126.9421816,37.5138589,"í™ˆìŠ¤í…Œë“œ","02-825-3359"));
+        NE.add(new Restaurant(126.9440458,37.5119953,"ì—­ì „ìš°ë™0410","02-825-0410"));
+        NE.add(new Restaurant(126.9454925,37.5132417,"íƒ€ì´íŒŸ","02-824-2181"));
 
-        NW.add(new Restaurant(126.9380114,37.5130529, "ÇÏ³ëÀÌº°", "02-824-7470"));
-        NW.add(new Restaurant(126.9369000,37.5125750, "¹é°¡³×ÇØ¹°Ä®±¹¼ö", "02-815-6555"));
+        NW.add(new Restaurant(126.9380114,37.5130529, "í•˜ë…¸ì´ë³„", "02-824-7470"));
+        NW.add(new Restaurant(126.9369000,37.5125750, "ë°±ê°€ë„¤í•´ë¬¼ì¹¼êµ­ìˆ˜", "02-815-6555"));
 
-        SW.add(new Restaurant(126.9396987, 37.5069320, "Ç³¼º½Ä´ç", "02-812-6447"));
-        SW.add(new Restaurant(126.9324260,37.5074360, "°¡Á¤½Ä¹é¹İ¿¾°ñ"," "));
-        SW.add(new Restaurant(126.9387730,37.5081210, "¿µºó°ü","02-813-3088"));
+        SW.add(new Restaurant(126.9396987, 37.5069320, "í’ì„±ì‹ë‹¹", "02-812-6447"));
+        SW.add(new Restaurant(126.9324260,37.5074360, "ê°€ì •ì‹ë°±ë°˜ì˜›ê³¨"," "));
+        SW.add(new Restaurant(126.9387730,37.5081210, "ì˜ë¹ˆê´€","02-813-3088"));
 
-        SE.add(new Restaurant(126.9477678 ,37.5079397, "¹ÙÁö¶ôÄ®±¹¼ö", "02-813-9936"));
-        SE.add(new Restaurant(126.9452561 ,37.5075738, "Ãµ¿ÜÃµ", "02-6745-7000"));
+        SE.add(new Restaurant(126.9477678 ,37.5079397, "ë°”ì§€ë½ì¹¼êµ­ìˆ˜", "02-813-9936"));
+        SE.add(new Restaurant(126.9452561 ,37.5075738, "ì²œì™¸ì²œ", "02-6745-7000"));
     }
 
 

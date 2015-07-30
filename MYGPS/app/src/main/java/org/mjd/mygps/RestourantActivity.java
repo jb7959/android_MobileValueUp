@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,9 +17,31 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.content.Intent;
 
+public class RestourantActivity extends ActionBarActivity {
+    WebView webView;
+
+    private class WebViewClientClass extends WebViewClient{
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url){
+            view.loadUrl(url);
+            return true;
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_restourant);
+        webView = (WebView)findViewById(R.id.webView);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl("https://valueup16-jb7959.c9.io/res_boards/4");
+        webView.setVerticalScrollBarEnabled(true);
+        webView.setWebViewClient(new WebViewClientClass());
+    }
+}
 
 
-
+/*
 public class RestourantActivity extends ActionBarActivity {
     Button backButton;
 
@@ -78,3 +102,5 @@ public class RestourantActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+*/
